@@ -1,0 +1,7 @@
+#+TODO: TODO(t) DOING(n) | DONE(d)
+
+* Csharp
+** DONE Clone repo
+** DONE Set up projectile
+Note: Needs ~hybrid~ indexing
+** DONE Get to something testable (according to the guide)
