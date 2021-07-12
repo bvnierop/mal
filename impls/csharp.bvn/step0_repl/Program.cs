@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace step0_repl
 {
@@ -27,16 +26,11 @@ namespace step0_repl
 
         static void Main(string[] args)
         {
-
             string line = "";
-            do
+            while ((line = ReadLine.Read("user> ")) != null)
             {
-                Console.Write("user> ");
-                line = Console.ReadLine();
-                if (line != null) {
-                    Console.WriteLine(rep(line));
-                }
-            } while (line != null);
+                Console.WriteLine(rep(line));
+            }
         }
     }
 }
