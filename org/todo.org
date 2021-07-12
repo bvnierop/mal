@@ -5,3 +5,4 @@
 ** DONE Set up projectile
 Note: Needs ~hybrid~ indexing
 ** DONE Get to something testable (according to the guide)
+** Step 0
