@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace step0_repl
+namespace step1_read_print
 {
     class Program
     {

@@ -10,7 +10,7 @@ Note: Needs ~hybrid~ indexing
 *** DONE Add line editing support
 ** DOING Step 1: Read and Print
 *** DONE Copy step0 project to step1 project
-*** TODO Add a file: reader.cs
+*** DONE Add a file: reader.cs
 *** TODO Create a reader object (stateful)
 With methods ~next~ and ~peek~. ~next~ returns the current token and increments
 position. ~peek~ just returns the token.
@@ -45,3 +45,5 @@ string representation:
 
 ** Personal refactors
 *** TODO Make the reader object stateless
+*** TODO Fix namespaces
+A namespace like ~step0_repl~ is just ugly as hell.
