@@ -54,5 +54,65 @@ namespace Mal.Lib.Tests
             Reader.Tokenize(input).Should().BeEquivalentTo(
                 new string[] { "(", "+", "1", "1", ")" });
         }
+
+        /// ~read_form~ peeks at the first token of the given ~Reader~ object and calls
+        /// either ~read_list~ or ~read_atom~ based on that token. It returns a mal type.
+
+        [Test]
+        public void ReadForm_ReadsAnAtom()
+        {
+            var input = "1";
+            var reader = Reader.ReadStr(input);
+
+            Reader.ReadForm(reader).Should().BeEquivalentTo(new MalAtom("1"));
+        }
+
+        [Test]
+        public void ReadForm_ReadsAList()
+        {
+            var input = "(+ 1 1)";
+
+            var reader = Reader.ReadStr(input);
+
+            var result = new MalList(null);
+            result.Add(new MalAtom("+"));
+            result.Add(new MalAtom("1"));
+            result.Add(new MalAtom("1"));
+
+            Reader.ReadForm(reader).Should().BeEquivalentTo(result);
+        }
+
+        [Test]
+        public void ReadForm_ReadsNestedLists()
+        {
+            var input = "(+ 1 (+ 2 3) 4)";
+
+            var reader = Reader.ReadStr(input);
+
+            var innerList = new MalList(null);
+            innerList.Add(new MalAtom("+"));
+            innerList.Add(new MalAtom("2"));
+            innerList.Add(new MalAtom("3"));
+
+            var outerList = new MalList(null);
+            outerList.Add(new MalAtom("+"));
+            outerList.Add(new MalAtom("1"));
+            outerList.Add(innerList);
+            outerList.Add(new MalAtom("4"));
+
+            Reader.ReadForm(reader).Should().BeEquivalentTo(outerList);
+        }
+
+        [Test]
+        public void ReadForm_FailsWhenTheListNeverEnds()
+        {
+            var input = "(+ 1";
+
+            var reader = Reader.ReadStr(input);
+
+            FluentActions.Invoking(() => Reader.ReadForm(reader))
+                .Should()
+                .Throw<Reader.EofException>();
+        }
     }
 }

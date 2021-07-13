@@ -20,14 +20,14 @@ It'll call tokenize and then instantiate a ~Reader~ object.
 It'll tokenize the input, using this regular expression (according to the
 guide):
 ~/[\s,]*(~@|[\[\]{}()'`~^@]|"(?:\\.|[^\\"])*"?|;.*|[^\s\[\]{}('"`,;)]*)/~
-*** TODO Add a file: types.cs
-*** TODO Add a function ~read_form~
+*** DONE Add a file: types.cs
+*** DONE Add a function ~read_form~
 ~read_form~ peeks at the first token of the given ~Reader~ object and calls
 either ~read_list~ or ~read_atom~ based on that token. It returns a mal type.
-*** TODO Add a function ~read_list~
+*** DONE Add a function ~read_list~
 This calls ~read_form~ repeatedly until a closing brace is encountered. If none
 is encountered, that's an error.
-*** TODO Add a function ~read_atom~
+*** DONE Add a function ~read_atom~
 This reads everything that isn't a list.
 
 *** TODO Add a file: printer.cs
@@ -44,6 +44,7 @@ string representation:
 **** Types
 **** Reader
 
+*** TODO Remove string ctor from MalType
 ** Personal refactors
 *** TODO Make the reader object stateless
 *** TODO Fix namespaces

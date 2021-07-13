@@ -28,6 +28,34 @@ namespace Mal.Lib
                 .Where(s => !string.IsNullOrEmpty(s));
         }
 
+        public static MalType ReadForm(Reader reader)
+        {
+            switch (reader.Peek())
+            {
+                case "(":
+                    return ReadList(reader);
+                default:
+                    return ReadAtom(reader);
+            }
+        }
+
+        private static MalAtom ReadAtom(Reader reader)
+        {
+            return new MalAtom(reader.Next());
+        }
+
+        private static MalList ReadList(Reader reader)
+        {
+            var list = new MalList(null);
+            reader.Next(); // Swallow the brace
+            while (reader.Peek() != ")")
+            {
+                list.Add(ReadForm(reader));
+            }
+            reader.Next(); // Swallow the brace
+            return list;
+        }
+
         public Reader(IEnumerable<string> tokens)
         {
             _tokens = tokens;
