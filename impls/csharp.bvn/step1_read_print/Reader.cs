@@ -1,3 +1,0 @@
-namespace Mal.Reader
-{
-}

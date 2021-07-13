@@ -11,7 +11,7 @@ Note: Needs ~hybrid~ indexing
 ** DOING Step 1: Read and Print
 *** DONE Copy step0 project to step1 project
 *** DONE Add a file: reader.cs
-*** TODO Create a reader object (stateful)
+*** DONE Create a reader object (stateful)
 With methods ~next~ and ~peek~. ~next~ returns the current token and increments
 position. ~peek~ just returns the token.
 *** TODO Create a function ~read_str~
@@ -36,6 +36,7 @@ string representation:
 - For a list, call ~pr_str~ on each element, surround by braces.
 - For a number, return it's string representation.
 - For everything else, return the name as string.
+*** DONE Link lib to step1 project
 *** TODO Fix issues
 *** TODO Look at deferrables
 *** TODO Extract some things to a library
