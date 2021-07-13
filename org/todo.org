@@ -14,9 +14,9 @@ Note: Needs ~hybrid~ indexing
 *** DONE Create a reader object (stateful)
 With methods ~next~ and ~peek~. ~next~ returns the current token and increments
 position. ~peek~ just returns the token.
-*** TODO Create a function ~read_str~
+*** DONE Create a function ~read_str~
 It'll call tokenize and then instantiate a ~Reader~ object.
-*** TODO Create a function ~tokenize~
+*** DONE Create a function ~tokenize~
 It'll tokenize the input, using this regular expression (according to the
 guide):
 ~/[\s,]*(~@|[\[\]{}()'`~^@]|"(?:\\.|[^\\"])*"?|;.*|[^\s\[\]{}('"`,;)]*)/~

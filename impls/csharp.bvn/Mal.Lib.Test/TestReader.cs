@@ -45,5 +45,14 @@ namespace Mal.Lib.Tests
             reader.Invoking(r => r.Peek())
                 .Should().Throw<Reader.EofException>();
         }
+
+        [Test]
+        public void Tokenize_TokenizesTheInput()
+        {
+            var input = "(+ 1 1)";
+
+            Reader.Tokenize(input).Should().BeEquivalentTo(
+                new string[] { "(", "+", "1", "1", ")" });
+        }
     }
 }
