@@ -5,6 +5,43 @@
 ** DONE Set up projectile
 Note: Needs ~hybrid~ indexing
 ** DONE Get to something testable (according to the guide)
-** DONE Step 0
+** DONE Step 0: The REPL
 *** DONE Basics
 *** DONE Add line editing support
+** DOING Step 1: Read and Print
+*** DONE Copy step0 project to step1 project
+*** TODO Add a file: reader.cs
+*** TODO Create a reader object (stateful)
+With methods ~next~ and ~peek~. ~next~ returns the current token and increments
+position. ~peek~ just returns the token.
+*** TODO Create a function ~read_str~
+It'll call tokenize and then instantiate a ~Reader~ object.
+*** TODO Create a function ~tokenize~
+It'll tokenize the input, using this regular expression (according to the
+guide):
+~/[\s,]*(~@|[\[\]{}()'`~^@]|"(?:\\.|[^\\"])*"?|;.*|[^\s\[\]{}('"`,;)]*)/~
+*** TODO Add a file: types.cs
+*** TODO Add a function ~read_form~
+~read_form~ peeks at the first token of the given ~Reader~ object and calls
+either ~read_list~ or ~read_atom~ based on that token. It returns a mal type.
+*** TODO Add a function ~read_list~
+This calls ~read_form~ repeatedly until a closing brace is encountered. If none
+is encountered, that's an error.
+*** TODO Add a function ~read_atom~
+This reads everything that isn't a list.
+
+*** TODO Add a file: printer.cs
+Containing a single function: ~pr_str~. It takes a mal data type and returns the
+string representation:
+- For a list, call ~pr_str~ on each element, surround by braces.
+- For a number, return it's string representation.
+- For everything else, return the name as string.
+*** TODO Fix issues
+*** TODO Look at deferrables
+*** TODO Extract some things to a library
+**** ReadLine
+**** Types
+**** Reader
+
+** Personal refactors
+*** TODO Make the reader object stateless
