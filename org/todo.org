@@ -30,13 +30,14 @@ is encountered, that's an error.
 *** DONE Add a function ~read_atom~
 This reads everything that isn't a list.
 
-*** TODO Add a file: printer.cs
+*** DONE Add a file: printer.cs
 Containing a single function: ~pr_str~. It takes a mal data type and returns the
 string representation:
 - For a list, call ~pr_str~ on each element, surround by braces.
 - For a number, return it's string representation.
 - For everything else, return the name as string.
 *** DONE Link lib to step1 project
+*** TODO Hook it all up
 *** TODO Fix issues
 *** TODO Look at deferrables
 *** TODO Extract some things to a library
@@ -45,7 +46,9 @@ string representation:
 **** Reader
 
 *** TODO Remove string ctor from MalType
-** Personal refactors
+** Personal tasks
 *** TODO Make the reader object stateless
 *** TODO Fix namespaces
 A namespace like ~step0_repl~ is just ugly as hell.
+
+*** TODO Pretty printing

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mal.Lib
 {
@@ -17,6 +19,11 @@ namespace Mal.Lib
         public MalAtom(string raw) : base(raw)
         {
         }
+
+        public override string ToString()
+        {
+            return Raw;
+        }
     }
 
     public class MalList : MalType
@@ -31,6 +38,13 @@ namespace Mal.Lib
         public void Add(MalType element)
         {
             _elements.Add(element);
+        }
+
+        public override string ToString()
+        {
+            var strings = _elements.Select(e => e.ToString());
+            var joined = String.Join(" ", strings);
+            return $"({joined})";
         }
     }
 }
