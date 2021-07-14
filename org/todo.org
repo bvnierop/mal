@@ -37,7 +37,7 @@ string representation:
 - For a number, return it's string representation.
 - For everything else, return the name as string.
 *** DONE Link lib to step1 project
-*** TODO Hook it all up
+*** DONE Hook it all up
 *** TODO Fix issues
 *** TODO Look at deferrables
 *** TODO Extract some things to a library

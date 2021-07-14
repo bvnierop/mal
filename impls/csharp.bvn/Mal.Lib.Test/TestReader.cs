@@ -1,3 +1,4 @@
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -53,6 +54,16 @@ namespace Mal.Lib.Tests
 
             Reader.Tokenize(input).Should().BeEquivalentTo(
                 new string[] { "(", "+", "1", "1", ")" });
+        }
+
+
+        [Test]
+        public void Tokenize_TreatsCommasAsWhitespace()
+        {
+            var input = "(1 2, 3)";
+
+            Reader.Tokenize(input).Should().BeEquivalentTo(
+                new string[] { "(", "1", "2", "3", ")" });
         }
 
         /// ~read_form~ peeks at the first token of the given ~Reader~ object and calls

@@ -1,22 +1,23 @@
 ﻿using System;
+using Mal.Lib;
 
 namespace step1_read_print
 {
     class Program
     {
-        static string READ(string s)
+        static MalType READ(string s)
         {
-            return s;
+            return Reader.ReadForm(Reader.ReadStr(s));
         }
 
-        static string EVAL(string s)
+        static MalType EVAL(MalType expression)
         {
-            return s;
+            return expression;
         }
 
-        static string PRINT(string s)
+        static string PRINT(MalType expression)
         {
-            return s;
+            return Printer.PrStr(expression);
         }
 
         static string rep(string line)
@@ -29,7 +30,14 @@ namespace step1_read_print
             string line = "";
             while ((line = ReadLine.Read("user> ")) != null)
             {
-                Console.WriteLine(rep(line));
+                try
+                {
+                    Console.WriteLine(rep(line));
+                }
+                catch (Reader.EofException)
+                {
+                    Console.WriteLine("ERROR: Unexpected end of input");
+                }
             }
         }
     }

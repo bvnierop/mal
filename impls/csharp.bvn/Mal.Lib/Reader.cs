@@ -9,7 +9,6 @@ namespace Mal.Lib
     {
         public class EofException : Exception { };
 
-
         private IEnumerable<string> _tokens;
 
         public static Reader ReadStr(string str)
@@ -22,9 +21,11 @@ namespace Mal.Lib
 
             var regex = new Regex(@"[\s,]*(~@|[\[\]{}()'`~^@]|""(?:\\.|[^\\""])*""?|;.*|[^\s\[\]{}('""`,;)]*)");
             var matches = regex.Matches(str);
-            return matches.SelectMany(
-                m => m.Captures.Select(c => c.ToString()))
-                .Select(s => s.Trim())
+
+            var groups = matches.SelectMany(m => m.Groups.Values.Skip(1));
+
+            return groups.SelectMany(g => g.Captures)
+                .Select(c => c.Value.Trim())
                 .Where(s => !string.IsNullOrEmpty(s));
         }
 
