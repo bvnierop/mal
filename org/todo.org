@@ -38,8 +38,76 @@ string representation:
 - For everything else, return the name as string.
 *** DONE Link lib to step1 project
 *** DONE Hook it all up
-*** TODO Fix issues
-*** TODO Look at deferrables
+*** TODO Deferrable
+**** Add support for other basic data types
+***** nil
+***** true
+***** false
+***** string
+#+begin_quote
+When a string is read, the following transformations are applied: a backslash
+followed by a doublequote is translated into a plain doublequote character, a
+backslash followed by "n" is translated into a newline, and a backslash followed
+by another backslash is translated into a single backslash. To properly print a
+string (for step 4 string functions), the pr_str function needs another
+parameter called print_readably. When print_readably is true, doublequotes,
+newlines, and backslashes are translated into their printed representations (the
+reverse of the reader). The PRINT function in the main program should call
+pr_str with print_readably set to true.
+#+end_quote
+
+**** Add error checking for matched parens
+Already have this for ~()~, but not for the other brace styles: ~{}~, ~[]~.
+This will come automagically as I build support for the data types they
+represent.
+**** Add support for reader macros
+See [[file:~/projects/mal/tests/step1_read_print.mal][the test file]] for the format these macros have.
+**** Add support for other mal types
+***** keyword
+#+begin_quote
+a keyword is a token that begins with a colon. A keyword can just be stored as a
+string with special unicode prefix like 0x29E (or char 0xff/127 if the target
+language does not have good unicode support) and the printer translates strings
+with that prefix back to the keyword representation. This makes it easy to use
+keywords as hash map keys in most languages. You can also store keywords as a
+unique data type, but you will need to make sure they can be used as hash map
+keys (which may involve doing a similar prefixed translation anyways).
+#+end_quote
+***** vector
+#+begin_quote
+a vector can be implemented with same underlying type as a list as long as there
+is some mechanism to keep track of the difference. Vector literals are similar
+to lists, but use bracket as delimiters instead of parenthesis. For example, []
+constructs an empty vector and [1 "a"] a vector with two elements. You can use
+the same reader function for both lists and vectors by adding parameters for the
+starting and ending tokens.
+#+end_quote
+
+I disagree partially with the above. I am going to store vectors as arrays that
+are mutable in size.
+***** hash-map
+#+begin_quote
+a hash-map is an associative data structure that maps strings to other mal
+values. If you implement keywords as prefixed strings, then you only need a
+native associative data structure which supports string keys. Clojure allows any
+value to be a hash map key, but the base functionality in mal is to support
+strings and keyword keys. Hash-map literals are constructed with braces
+delimiters. For example, {} constructs an empty map, {"a" 1 :b "whatever"}
+associates the a key to an integer value and the :b key to a string
+value. Because of the representation of hash-maps as an alternating sequence of
+keys and values, you can probably use the same reader function for hash-maps as
+lists and vectors with parameters to indicate the starting and ending
+tokens. The odd tokens are then used for keys with the corresponding even tokens
+as the values.
+#+end_quote
+**** Add comment support
+#+begin_quote
+The tokenizer should ignore tokens that start with ";". Your read_str function
+will need to properly handle when the tokenizer returns no values. The simplest
+way to do this is to return nil mal value. A cleaner option (that does not print
+nil at the prompt is to throw a special exception that causes the main loop to
+simply continue at the beginning of the loop without calling rep.
+#+end_quote
 *** TODO Extract some things to a library
 **** ReadLine
 **** Types
